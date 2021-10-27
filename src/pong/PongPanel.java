@@ -49,6 +49,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			paintSprite(g, paddle2);
 			paintScores(g);
 		}
+		if(gameState == GameState.GameOver) {
+			paintWin(g);
+		}
 	}
 	
 	private void paintDottedLine(Graphics g) {
@@ -181,6 +184,18 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(scoreFont);
 		g.drawString(leftScore, xPadding, yPadding);
 		g.drawString(rightScore, getWidth()-xPadding, yPadding);
+	}
+	public void paintWin(Graphics g) {
+		int xPadding = getWidth()/4;;
+		if(gameWinner == Player.Two) {
+			xPadding = xPadding * 3;
+		}
+		int yPadding = getHeight()/2;
+		int fontSize = 50;
+		Font font = new Font("Serif", Font.BOLD, fontSize);
+		String win = "WIN!";
+		g.setFont(font);
+		g.drawString(win, xPadding, yPadding);
 	}
 
 }
