@@ -68,8 +68,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		switch(gameState) {
 		case Initialising:{
 			createObjects();
-			ball.setxVelocity(BALL_MOVE_SPEED);
-			ball.setyVelocity(BALL_MOVE_SPEED);
+			player1Score = 0;
+			player2Score = 0;
+			gameWinner = null;
+			ball.setxVelocity(0);
+			ball.setyVelocity(0);
 			gameState = GameState.Playing;
 			break;
 		}
@@ -101,6 +104,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent event) {
+		if(ball.getxVelocity() == 0 && ball.getyVelocity() == 0) {
+			ball.setxVelocity(BALL_MOVE_SPEED);
+			ball.setyVelocity(BALL_MOVE_SPEED);
+		}
 		if(event.getKeyCode() == KeyEvent.VK_UP) {
 			paddle2.setyVelocity(-PADDLE_SPEED);
 		}else if(event.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -109,6 +116,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			paddle1.setyVelocity(-PADDLE_SPEED);
 		}else if(event.getKeyCode() == KeyEvent.VK_S) {
 			paddle1.setyVelocity(PADDLE_SPEED);
+		}
+		if(gameState == GameState.GameOver && event.getKeyCode() == KeyEvent.VK_R) {
+			gameState = GameState.Initialising;
 		}
 	}
 
