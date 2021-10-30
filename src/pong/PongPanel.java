@@ -152,6 +152,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	public void checkPaddleBounce() {
 		if((ball.getxVelocity() < 0 && ball.getRectangle().intersects(paddle1.getRectangle()))|| (ball.getxVelocity() > 0 && ball.getRectangle().intersects(paddle2.getRectangle()))) {
 			ball.setxVelocity(-ball.getxVelocity());
+			ball.randomBallColour();
 		}
 	}
 	
