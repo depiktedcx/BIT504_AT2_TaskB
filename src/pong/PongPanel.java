@@ -17,8 +17,9 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	private static final Color WINDOW_BACKGROUND = Color.BLACK;
 	private static final int TIMER_DELAY = 5;
-	private static final int BALL_MOVE_SPEED = 2;
+	private static final int BALL_MOVE_SPEED = 5;
 	private static final int SCORE_TO_WIN = 3;
+	private static final int PADDLE_SPEED = 5;
 	int player1Score = 0, player2Score = 0;
 	Player gameWinner;
 	Ball ball;
@@ -101,13 +102,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent event) {
 		if(event.getKeyCode() == KeyEvent.VK_UP) {
-			paddle2.setyVelocity(-1);
+			paddle2.setyVelocity(-PADDLE_SPEED);
 		}else if(event.getKeyCode() == KeyEvent.VK_DOWN) {
-			paddle2.setyVelocity(1);
+			paddle2.setyVelocity(PADDLE_SPEED);
 		}else if(event.getKeyCode() == KeyEvent.VK_W) {
-			paddle1.setyVelocity(-1);
+			paddle1.setyVelocity(-PADDLE_SPEED);
 		}else if(event.getKeyCode() == KeyEvent.VK_S) {
-			paddle1.setyVelocity(1);
+			paddle1.setyVelocity(PADDLE_SPEED);
 		}
 	}
 
@@ -152,6 +153,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	public void checkPaddleBounce() {
 		if((ball.getxVelocity() < 0 && ball.getRectangle().intersects(paddle1.getRectangle()))|| (ball.getxVelocity() > 0 && ball.getRectangle().intersects(paddle2.getRectangle()))) {
 			ball.setxVelocity(-ball.getxVelocity());
+			ball.randomBallColour();
 		}
 	}
 	
